@@ -35,3 +35,6 @@ discord:
       private:
         enable: true
 default-disable-private-chat-inspect: false
+sync-channels:
+  - hoge
+  - fuga
