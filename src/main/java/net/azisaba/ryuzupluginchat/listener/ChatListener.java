@@ -4,6 +4,7 @@ import com.github.ucchyocean.lc3.LunaChat;
 import com.github.ucchyocean.lc3.channel.Channel;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.azisaba.ryuzupluginchat.RyuZUPluginChat;
 import net.azisaba.ryuzupluginchat.localization.Messages;
@@ -28,7 +29,7 @@ public class ChatListener implements Listener {
   public void onChat(AsyncPlayerChatEvent e) {
     Player p = e.getPlayer();
     boolean global = LunaChat.getAPI().getDefaultChannel(p.getName()) == null;
-
+    List<String> syncChannels = plugin.getConfig().getStringList("sync-channels");
     if (global || e.getMessage().charAt(0) == '!' || e.getMessage().startsWith("#!")) {
       String msg = cutPrefix(e.getMessage());
       GlobalMessageData data = plugin.getMessageDataFactory().createGlobalMessageData(p, msg);
@@ -37,6 +38,9 @@ public class ChatListener implements Listener {
           .runTaskAsynchronously(plugin, () -> plugin.getPublisher().publishGlobalMessage(data));
     } else {
       Channel channel = LunaChat.getAPI().getDefaultChannel(p.getName());
+      if (!syncChannels.contains(channel.getName())) {
+        return;
+      }
       if (channel.getName().equals(plugin.getVcLunaChatChannelSharer().getLunaChatChannelName())) {
         if (lastDiscordChannelChatMap.getOrDefault(p.getUniqueId(), 0L) + 1000L
             > System.currentTimeMillis()) {
