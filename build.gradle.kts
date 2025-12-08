@@ -23,8 +23,8 @@ repositories {
     mavenCentral()
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://repo.azisaba.net/repository/maven-public/")
-    maven("https://papermc.io/repo/repository/maven-snapshots/")
-    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-snapshots/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven("https://repo.maven.apache.org/maven2/")
 }
