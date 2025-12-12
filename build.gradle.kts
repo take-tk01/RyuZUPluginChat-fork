@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.jedis)
     implementation(libs.aikar.taskchain)
     implementation(libs.semver4j)
+    implementation("org.slf4j:slf4j-simple:2.0.9")
     compileOnly(libs.paper.api)
     compileOnly(libs.luckperms.api)
     compileOnly(libs.lunachatplus)
@@ -77,6 +78,7 @@ tasks.build {
 tasks.shadowJar {
     isEnableRelocation = true
     relocationPrefix = "net.azisaba.ryuzupluginchat.dependency"
+    mergeServiceFiles()
 }
 
 lombok {
